@@ -8,6 +8,10 @@ import PushToTalk from './components/PushToTalk/PushToTalk';
 import ProductList from './components/ProductList/ProductList';
 import LocationList from './components/LocationList/LocationList';
 import BubblesCanvas from './components/BubblesCanvas/BubblesCanvas';
+import FishesCanvas from './components/FishesCanvas/FishesCanvas';
+import SeaweedCanvas from './components/SeaweedCanvas/SeaweedCanvas';
+import GodRays from './components/GodRays/GodRays';
+import PlanktonCanvas from './components/PlanktonCanvas/PlanktonCanvas';
 import './App.css';
 
 function App() {
@@ -16,7 +20,11 @@ function App() {
 
   return (
     <div className="app-container">
+      <GodRays />
+      <PlanktonCanvas />
       <BubblesCanvas />
+      <FishesCanvas />
+      <SeaweedCanvas />
       
       <StatusBar />
       
