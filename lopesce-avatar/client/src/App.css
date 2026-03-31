@@ -30,20 +30,21 @@ body {
   justify-content: center;
   transition: all 0.5s ease;
   padding: 2rem;
-  gap: 2rem;
+  gap: 4rem; /* Più spazio tra Avatar e Liste per non farli confondere */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .main-content.layout-left {
-  justify-content: flex-start;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+  justify-content: space-between;
 }
 
 .avatar-section {
   display: flex;
+  align-items: center; /* Tiene sempre e comunque l'avatar centrato in bolla */
   justify-content: center;
-  align-items: center;
   transition: all 0.5s ease;
 }
 
@@ -57,11 +58,11 @@ body {
 
 .content-section {
   flex: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  max-height: 80vh; /* Permette alla sezione di restringersi se ha poco contenuto rimanendo centrata! */
+  overflow-y: auto; /* Scorre se esplode */
+  padding: 2rem 1rem;
+  /* Fondo rimosso, contenuto libero sullo schermo base */
   animation: fade-slide-in 0.5s ease forwards;
-  overflow: hidden;
 }
 
 .controls-section {

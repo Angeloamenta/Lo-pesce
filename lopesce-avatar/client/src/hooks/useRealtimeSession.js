@@ -93,18 +93,23 @@ export function useRealtimeSession() {
                 tools: [
                   {
                     type: "function",
-                    name: "change_screen",
-                    description: "Cambia la schermata dell'app per mostrare prodotti, sedi o ricette.",
-                    parameters: {
-                      type: "object",
-                      properties: {
-                        screen: {
-                          type: "string",
-                          enum: ["products", "locations", "recipe", "default"]
-                        }
-                      },
-                      required: ["screen"]
-                    }
+                    name: "show_products",
+                    description: "Usa questo tool SOLO ed esclusivamente se l'utente ti chiede esplictamente di mostrargli il catalogo, i prodotti, il listino o cosa vendete.",
+                  },
+                  {
+                    type: "function",
+                    name: "show_locations",
+                    description: "Usa questo tool SOLO ed esclusivamente se l'utente chiede esplicitamente dove si trovano le sedi, i negozi o i punti vendita.",
+                  },
+                  {
+                    type: "function",
+                    name: "show_recipes",
+                    description: "Usa questo tool SOLO ed esclusivamente se l'utente ti chiede esplicitamente una ricetta o consigli su come cucinare.",
+                  },
+                  {
+                    type: "function",
+                    name: "hide_interface",
+                    description: "Nasconde tutte le tabelle. Usalo se l'utente vuole chiudere le schede o parlare solo in generale.",
                   }
                 ],
                 tool_choice: "auto"
@@ -126,40 +131,38 @@ export function useRealtimeSession() {
             console.log("-> OAI Event:", msg.type); // DEBUG UTILITIES
             
             if (msg.type === "response.function_call_arguments.done") {
-              // OpenAI ha deciso di chiamare il nostro Tool!
-              if (msg.name === "change_screen") {
-                try {
-                  const args = JSON.parse(msg.arguments);
-                  const intent = args.screen;
-                  
-                  if (intent === "products") {
-                    setActiveComponent("products");
-                    setAvatarPosition("left");
-                  } else if (intent === "locations") {
-                    setActiveComponent("locations");
-                    setAvatarPosition("left");
-                  } else if (intent === "recipe") {
-                    setActiveComponent("recipe");
-                    setAvatarPosition("left");
-                  } else {
-                    resetUI();
-                  }
-
-                  // FONDAMENTALE: comunichiamo a OpenAI che il tool è andato a buon fine, altrimenti si blocca in "attesa di output" e ripete sempre la stessa frase!
-                  if (msg.call_id) {
-                    dc.send(JSON.stringify({
-                      type: "conversation.item.create",
-                      item: {
-                        type: "function_call_output",
-                        call_id: msg.call_id,
-                        output: JSON.stringify({ success: true, message: "Schermata aggiornata correttamente" })
-                      }
-                    }));
-                  }
-
-                } catch (parseError) {
-                  console.error("Errore parsando i parametri del tool:", parseError);
+              // OpenAI ha deciso di chiamare uno specfico Tool!
+              const toolName = msg.name;
+              try {
+                if (toolName === "show_products") {
+                  setActiveComponent("products");
+                  setAvatarPosition("left");
+                } else if (toolName === "show_locations") {
+                  setActiveComponent("locations");
+                  setAvatarPosition("left");
+                } else if (toolName === "show_recipes") {
+                  setActiveComponent("recipe");
+                  setAvatarPosition("left");
+                } else if (toolName === "hide_interface") {
+                  resetUI();
                 }
+
+                // FONDAMENTALE: comunichiamo a OpenAI che il tool è andato a buon fine
+                if (msg.call_id) {
+                  dc.send(JSON.stringify({
+                    type: "conversation.item.create",
+                    item: {
+                      type: "function_call_output",
+                      call_id: msg.call_id,
+                      output: JSON.stringify({ success: true, message: "Azione completata, ora continua a parlare con l'utente normalmente o mettiti in ascolto." })
+                    }
+                  }));
+
+                  // COMANDO VITALE: obbliga il server a metabolizzare la risposta del tool chiudendo il blocco del Turn nel vector context!
+                  dc.send(JSON.stringify({ type: "response.create" }));
+                }
+              } catch (parseError) {
+                console.error("Errore chiamando tool:", parseError);
               }
             } else if (msg.type === "response.audio.started") {
               setSpeaking(true);

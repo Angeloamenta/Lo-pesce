@@ -1,0 +1,53 @@
+.avatar3d-wrapper {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin-top: 80px;
+  transition: all 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar3d-wrapper.left {
+  width: 500px;
+  height: 500px;
+  margin-top: 0px;
+}
+
+.avatar3d-wrapper::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  z-index: 1; /* Il Canvas avrà z-index: 2, quindi l'alone andrà dietro */
+  transition: all 0.3s ease;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* Animazione Speaking: Pulse/Glow azzurro */
+.avatar3d-wrapper.speaking::after {
+  animation: pulse-glow-3d 1.5s infinite;
+  background: radial-gradient(circle, rgba(0, 200, 255, 0.4) 0%, rgba(0, 200, 255, 0) 70%);
+}
+
+@keyframes pulse-glow-3d {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.5; }
+}
+
+/* Animazione Listening: Background glow rosso */
+.avatar3d-wrapper.listening::after {
+  animation: listen-pulse-3d 1.5s infinite;
+  background: radial-gradient(ellipse, rgba(255, 68, 68, 0.4) 0%, rgba(255, 68, 68, 0) 70%);
+}
+
+@keyframes listen-pulse-3d {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}

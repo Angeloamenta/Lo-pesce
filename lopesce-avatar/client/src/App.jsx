@@ -2,7 +2,8 @@ import React from 'react';
 import { useAppStore } from './store/useAppStore';
 import { useRealtimeSession } from './hooks/useRealtimeSession';
 import StatusBar from './components/StatusBar/StatusBar';
-import Avatar from './components/Avatar/Avatar';
+// import Avatar from './components/Avatar/Avatar';
+import Avatar3D from './components/Avatar3D/Avatar3D';
 import PushToTalk from './components/PushToTalk/PushToTalk';
 import ProductList from './components/ProductList/ProductList';
 import LocationList from './components/LocationList/LocationList';
@@ -27,7 +28,8 @@ function App() {
 
       <main className={`main-content layout-${avatarPosition}`}>
         <div className="avatar-section">
-          <Avatar position={avatarPosition} />
+          {/* <Avatar position={avatarPosition} /> */}
+          <Avatar3D position={avatarPosition} />
         </div>
 
         {activeComponent === 'products' && (
