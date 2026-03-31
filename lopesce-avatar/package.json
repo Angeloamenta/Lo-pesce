@@ -1,0 +1,11 @@
+{
+  "name": "lopesce-avatar",
+  "version": "1.0.0",
+  "description": "Monorepo per Avatar Lo Pesce (Client React + Server Node)",
+  "scripts": {
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

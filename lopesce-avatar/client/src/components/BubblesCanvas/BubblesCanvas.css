@@ -1,0 +1,10 @@
+.bubbles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* Dietro a tutto ma sopra al background del body */
+  pointer-events: none; /* Completamente invisibile ai click del mouse */
+  mix-blend-mode: screen; /* Fonde le bolle con lo sfondo per un respiro più magico */
+}

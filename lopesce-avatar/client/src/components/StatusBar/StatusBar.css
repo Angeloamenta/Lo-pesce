@@ -1,0 +1,55 @@
+.status-bar {
+  width: 100%;
+  padding: 12px 24px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.status-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff4444; /* offline */
+  box-shadow: 0 0 8px rgba(255, 68, 68, 0.6);
+  transition: all 0.3s ease;
+}
+
+.status-indicator.ready {
+  background: #00e676; /* pronto */
+  box-shadow: 0 0 8px rgba(0, 230, 118, 0.6);
+}
+
+.status-indicator.connecting {
+  background: #ffea00; /* connessione in corso (giallo) */
+  box-shadow: 0 0 8px rgba(255, 234, 0, 0.6);
+  animation: pulse-conn 1.5s infinite;
+}
+
+.status-message {
+  font-size: 0.85rem;
+  color: #ccc;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+@keyframes pulse-conn {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}

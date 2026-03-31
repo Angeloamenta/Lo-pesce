@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "citta": "Milano",
+    "indirizzo": "Via del Mare, 12",
+    "telefono": "+39 02 123456",
+    "email": "milano@lopesce.it",
+    "orari": "Lun-Sab: 09:00 - 20:00"
+  },
+  {
+    "id": 2,
+    "citta": "Roma",
+    "indirizzo": "Viale Oceano, 45",
+    "telefono": "+39 06 987654",
+    "email": "roma@lopesce.it",
+    "orari": "Lun-Sab: 09:00 - 20:00"
+  },
+  {
+    "id": 3,
+    "citta": "Napoli",
+    "indirizzo": "Via Partenope, 8",
+    "telefono": "+39 081 112233",
+    "email": "napoli@lopesce.it",
+    "orari": "Lun-Sab: 08:30 - 20:30, Dom: 09:00 - 13:00"
+  },
+  {
+    "id": 4,
+    "citta": "Torino",
+    "indirizzo": "Piazza Naviganti, 2",
+    "telefono": "+39 011 556677",
+    "email": "torino@lopesce.it",
+    "orari": "Lun-Sab: 09:00 - 19:30"
+  },
+  {
+    "id": 5,
+    "citta": "Bari",
+    "indirizzo": "Corso Vittorio Veneto, 100",
+    "telefono": "+39 080 998877",
+    "email": "bari@lopesce.it",
+    "orari": "Lun-Sab: 08:30 - 20:00"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "nome": "Trancio di Tonno Pinna Gialla",
+    "descrizione": "Tranci di tonno selezionati, surgelati a bordo per mantenere il sapore originale.",
+    "categoria": "Pesce",
+    "prezzo": 14.90,
+    "immagine": "https://placehold.co/400x300?text=Tonno"
+  },
+  {
+    "id": 2,
+    "nome": "Gamberi Argentini Grandi",
+    "descrizione": "Gamberi argentini sgusciati, pronti da cuocere. Ideali per grigliate.",
+    "categoria": "Frutti di Mare",
+    "prezzo": 18.50,
+    "immagine": "https://placehold.co/400x300?text=Gamberi"
+  },
+  {
+    "id": 3,
+    "nome": "Misto Scoglio",
+    "descrizione": "Preparato per risotto o spaghetti allo scoglio con cozze, vongole e calamari.",
+    "categoria": "Preparati",
+    "prezzo": 9.90,
+    "immagine": "https://placehold.co/400x300?text=Misto+Scoglio"
+  },
+  {
+    "id": 4,
+    "nome": "Filetti di Branzino",
+    "descrizione": "Filetti di branzino deliscati, ottimi al forno.",
+    "categoria": "Pesce",
+    "prezzo": 15.90,
+    "immagine": "https://placehold.co/400x300?text=Branzino"
+  },
+  {
+    "id": 5,
+    "nome": "Anelli di Calamaro",
+    "descrizione": "Anelli di calamaro teneri, perfetti per fritture leggere.",
+    "categoria": "Pesce",
+    "prezzo": 12.50,
+    "immagine": "https://placehold.co/400x300?text=Calamari"
+  },
+  {
+    "id": 6,
+    "nome": "Polpo Verace",
+    "descrizione": "Polpo intero già pulito, ideale per insalate o in umido.",
+    "categoria": "Pesce",
+    "prezzo": 22.00,
+    "immagine": "https://placehold.co/400x300?text=Polpo"
+  }
+]
