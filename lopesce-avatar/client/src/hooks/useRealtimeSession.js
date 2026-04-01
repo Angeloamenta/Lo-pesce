@@ -11,6 +11,7 @@ export function useRealtimeSession() {
     setSessionReady,
     setAvatarPosition,
     setActiveComponent,
+    setTranscript,
     resetUI,
   } = useAppStore();
 
@@ -67,8 +68,9 @@ export function useRealtimeSession() {
         // 4. Ricezione audio
         pc.ontrack = (event) => {
           if (audioEl.current && event.track.kind === 'audio') {
+            audioEl.current.pause();
             audioEl.current.srcObject = event.streams[0];
-            audioEl.current.play().catch(e => console.error("Play prevented", e));
+            audioEl.current.play().catch(e => console.warn("Play prevented", e));
           }
         };
 
@@ -88,7 +90,7 @@ export function useRealtimeSession() {
               type: "session.update",
               session: {
                 instructions: promptText,
-                input_audio_transcription: { model: "whisper-1" },
+                input_audio_transcription: { model: "whisper-1", language: "it" },
                 turn_detection: null,
                 tools: [
                   {
@@ -164,6 +166,16 @@ export function useRealtimeSession() {
               } catch (parseError) {
                 console.error("Errore chiamando tool:", parseError);
               }
+            } else if (msg.type === "conversation.item.input_audio_transcription.completed") {
+              console.log("[TRANSCRIPT EVENT]", JSON.stringify(msg));
+              const text = (msg.transcript || msg.item?.content?.[0]?.transcript || '').trim();
+              // Filtra le allucinazioni note di Whisper su audio silenzioso
+              const HALLUCINATIONS = [
+                'you', 'amara.org', 'sottotitoli', 'subtitles by',
+                'transcribed by', 'traduzione', '♪', '[musica]', '[music]'
+              ];
+              const isHallucination = !text || HALLUCINATIONS.some(h => text.toLowerCase().includes(h));
+              if (!isHallucination) setTranscript(text);
             } else if (msg.type === "response.audio.started") {
               setSpeaking(true);
             } else if (msg.type === "response.audio.done") {
@@ -224,7 +236,13 @@ export function useRealtimeSession() {
       console.warn("Microfono non inizializzato");
       return;
     }
-    
+
+    // Pulisce il buffer PRIMA di abilitare il mic: elimina i frame di silenzio
+    // accumulati mentre PTT era spento, così Whisper riceve solo audio reale
+    if (dataChannel.current?.readyState === 'open') {
+      dataChannel.current.send(JSON.stringify({ type: "input_audio_buffer.clear" }));
+    }
+
     // Abilita la registrazione (RTP manda l'audio fisico al server)
     localTrack.current.enabled = true;
     

@@ -15,7 +15,7 @@ import './App.css';
 
 function App() {
   const { sessionReady, startListening, stopListening } = useRealtimeSession();
-  const { avatarPosition, activeComponent, resetUI } = useAppStore();
+  const { avatarPosition, activeComponent, resetUI, transcript } = useAppStore();
   const controlsUnderAvatar = avatarPosition === 'left' && Boolean(activeComponent);
 
   useEffect(() => {
@@ -84,6 +84,12 @@ function App() {
 
       {!controlsUnderAvatar && (
         <footer className="controls-section">
+          <div className="debug-transcript">
+            {transcript
+              ? <span>{transcript}</span>
+              : <span className="debug-placeholder">La trascrizione apparirà qui…</span>
+            }
+          </div>
           <PushToTalk
             startListening={startListening}
             stopListening={stopListening}

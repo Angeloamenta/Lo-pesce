@@ -1,13 +1,14 @@
 import { create } from 'zustand';
 
 export const useAppStore = create((set) => ({
-  avatarPosition: 'left',      /* "center" | "left" */
-  activeComponent: 'locations', /* null | "products" | "locations" | "recipe" */
+  avatarPosition: 'center', /* "center" | "left" */
+  activeComponent: null,    /* null | "products" | "locations" | "recipe" */
   isListening: false,
   isSpeaking: false,
   isConnecting: false,
   statusMessage: '',
   sessionReady: false,
+  transcript: '',
 
   setAvatarPosition: (position) => set({ avatarPosition: position }),
   setActiveComponent: (component) => set({ activeComponent: component }),
@@ -16,10 +17,12 @@ export const useAppStore = create((set) => ({
   setConnecting: (status) => set({ isConnecting: status }),
   setStatus: (message) => set({ statusMessage: message }),
   setSessionReady: (ready) => set({ sessionReady: ready }),
+  setTranscript: (text) => set({ transcript: text }),
 
   resetUI: () => set({
     avatarPosition: 'center',
     activeComponent: null,
     statusMessage: '',
+    transcript: '',
   }),
 }));

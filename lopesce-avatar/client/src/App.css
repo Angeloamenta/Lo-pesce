@@ -140,11 +140,33 @@ html.bg-products {
 }
 
 .controls-section {
-  padding: 1rem; /* Ridotto da 2rem a 1rem per non spingere giù il mic su tablet orizzontali */
+  padding: 0.5rem 1rem 1rem; /* ridotto top per non spingere giù il mic */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+.debug-transcript {
+  width: 100%;
+  max-width: 480px;
+  min-height: 44px;
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  font-size: 0.95rem;
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+  transition: background 0.3s ease;
+}
+
+.debug-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+  font-size: 0.85rem;
 }
 
 .controls-section .ptt-container {
