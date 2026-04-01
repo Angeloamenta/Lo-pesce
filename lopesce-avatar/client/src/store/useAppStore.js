@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 
 export const useAppStore = create((set) => ({
-  avatarPosition: 'center', /* "center" | "left" */
-  activeComponent: null,    /* null | "products" | "locations" | "recipe" */
+  avatarPosition: 'left', /* "center" | "left" */
+  activeComponent: 'products',    /* null | "products" | "locations" | "recipe" */
   isListening: false,
   isSpeaking: false,
   isConnecting: false,

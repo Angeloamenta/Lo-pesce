@@ -5,7 +5,7 @@
 }
 
 .product-header {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem; /* Ridotto */
   text-align: center;
 }
 
@@ -21,9 +21,9 @@
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding-bottom: 2rem;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonne forzate regolarmente */
+  gap: 1rem; /* Ridotto */
+  padding-bottom: 1rem;
 }
 
 .product-card {
@@ -45,7 +45,7 @@
 
 .product-img-wrapper {
   position: relative;
-  height: 180px;
+  height: 120px; /* Ridotto stabilmente per schede molto compatte */
   overflow: hidden;
   background: rgba(255, 255, 255, 0.1);
 }
@@ -76,23 +76,23 @@
 }
 
 .product-info {
-  padding: 1.5rem;
+  padding: 1rem; /* Ridotto */
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .product-info h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.75rem;
-  line-height: 1.3;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
 }
 
 .product-desc {
   color: #aaa;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
   flex: 1;
 }
 
@@ -106,7 +106,7 @@
 }
 
 .product-price {
-  font-size: 1.5rem;
+  font-size: 1.3rem; /* Costantemente più morbido */
   font-weight: 700;
   color: #00c8ff;
 }
