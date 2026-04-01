@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAppStore } from './store/useAppStore';
 import { useRealtimeSession } from './hooks/useRealtimeSession';
-// import Avatar from './components/Avatar/Avatar';
-import Avatar3D from './components/Avatar3D/Avatar3D';
+import Avatar from './components/Avatar/Avatar';
+// import Avatar3D from './components/Avatar3D/Avatar3D';
 import PushToTalk from './components/PushToTalk/PushToTalk';
 import ProductList from './components/ProductList/ProductList';
 import LocationList from './components/LocationList/LocationList';
@@ -34,8 +34,7 @@ function App() {
 
       <main className={`main-content layout-${avatarPosition}`}>
         <div className={`avatar-section ${controlsUnderAvatar ? 'with-controls' : ''}`}>
-          {/* <Avatar position={avatarPosition} /> */}
-          <Avatar3D position={avatarPosition} />
+          <Avatar position={avatarPosition} />
           {controlsUnderAvatar && (
             <div className="avatar-controls">
               <PushToTalk

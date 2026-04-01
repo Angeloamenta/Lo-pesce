@@ -78,10 +78,15 @@ body {
 }
 
 .avatar-controls {
-  margin-top: 1rem;
+  margin-top: 0.25rem;
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.layout-left .avatar-section.with-controls .avatar-wrapper {
+  width: 420px;
+  height: 420px;
 }
 
 .layout-left .avatar-section {
@@ -109,6 +114,10 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+}
+
+.controls-section .ptt-container {
+  transform: translateY(-18px);
 }
 
 .reset-btn {

@@ -13,10 +13,11 @@ export default function ProductList() {
       <div className="product-grid">
         {productsData.map((prod) => (
           <div key={prod.id} className="product-card">
-            <div className="product-img-wrapper">
+            {/* <div className="product-img-wrapper">
+              <img src={prod.immagine} alt={prod.nome} loading="lazy" />
               <img src={prod.immagine} alt={prod.nome} loading="lazy" />
               <span className="product-category">{prod.categoria}</span>
-            </div>
+            </div> */}
             <div className="product-info">
               <h3>{prod.nome}</h3>
               <p className="product-desc">{prod.descrizione}</p>

@@ -22,7 +22,7 @@ export default function Avatar({ position }) {
 
   return (
     <div className={`avatar-wrapper ${position} ${isSpeaking ? 'speaking' : ''} ${isListening ? 'listening' : ''}`}>
-      <img src="/avatar.png" alt="Lo Pesce Avatar" className="avatar-image" />
+      <img src="/avatar-base.png" alt="Lo Pesce Avatar" className="avatar-image" />
     </div>
   );
 }
