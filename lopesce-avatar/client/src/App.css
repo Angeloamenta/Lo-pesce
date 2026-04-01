@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Rustico';
+  src: url('/Rustico-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   font-family: system-ui, -apple-system, sans-serif;
   background-color: #0a0a1a;
@@ -16,9 +24,19 @@ body {
   overflow: hidden;
 }
 
+.app-container h1,
+.app-container h2,
+.app-container h3,
+.app-container h4,
+.app-container h5,
+.app-container h6 {
+  font-family: 'Rustico', system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.5px;
+}
+
 .app-container {
-  /* Spazio “riservato” per UI assoluta in alto (StatusBar + reset) */
-  --top-ui-offset: 84px;
+  /* Spazio “riservato” per UI assoluta in alto (reset) */
+  --top-ui-offset: 56px;
   display: flex;
   flex-direction: column;
   height: 100dvh;
@@ -103,7 +121,7 @@ body {
   font-size: 0.9rem;
   transition: all 0.2s;
   position: absolute;
-  top: calc(var(--top-ui-offset) - 24px);
+  top: 16px;
   right: 20px;
   z-index: 11; /* sopra la status bar (z-index 10) */
 }

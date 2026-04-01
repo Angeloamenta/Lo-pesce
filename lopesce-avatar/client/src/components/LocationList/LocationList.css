@@ -64,6 +64,7 @@
 }
 
 .location-city-header h3 {
+  font-family: 'Rustico', system-ui, -apple-system, sans-serif;
   font-size: 1.5rem;
   color: #fff;
 }

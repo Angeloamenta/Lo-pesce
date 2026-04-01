@@ -83,6 +83,7 @@
 }
 
 .product-info h3 {
+  font-family: 'Rustico', system-ui, -apple-system, sans-serif;
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
   line-height: 1.2;
