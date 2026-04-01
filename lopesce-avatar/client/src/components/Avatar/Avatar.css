@@ -11,10 +11,10 @@
 }
 
 .avatar-wrapper.left {
-  width: 500px;
-  height: 500px;
+  width: 550px;
+  height: 550px;
   margin-top: 0px;
-  /* Mantiene la grandezza nativa e lo allinea al centro verticalmente annullando l'offset */
+  /* +10% rispetto al layout center */
 }
 
 .avatar-image {

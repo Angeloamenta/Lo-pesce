@@ -29,9 +29,9 @@ function App() {
     <div className="app-container">
       <GodRays />
       <PlanktonCanvas />
-      {activeComponent !== 'products' && <BubblesCanvas />}
-      {activeComponent !== 'products' && <FishesCanvas />}
-      {activeComponent !== 'products' && <SeaweedCanvas />}
+      <BubblesCanvas />
+      <FishesCanvas />
+      <SeaweedCanvas />
       
       {activeComponent && (
         <button className="reset-btn" onClick={resetUI}>
@@ -41,7 +41,14 @@ function App() {
 
       <main className={`main-content layout-${avatarPosition}`}>
         <div className={`avatar-section ${controlsUnderAvatar ? 'with-controls' : ''}`}>
-          <Avatar position={avatarPosition} variant={activeComponent ? 'base' : 'bolle'} />
+          <Avatar
+            position={avatarPosition}
+            variant={
+              activeComponent === 'locations' ? 'saluta' :
+              activeComponent ? 'base' :
+              'bolle'
+            }
+          />
           {controlsUnderAvatar && (
             <div className="avatar-controls">
               <PushToTalk

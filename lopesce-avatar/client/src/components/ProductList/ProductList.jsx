@@ -86,9 +86,8 @@ export default function ProductList() {
     <div className="product-list-container">
       <div className="product-header">
         <h2>Il Nostro Catalogo Surgelati</h2>
-        <p>Scopri la freschezza dei prodotti Lo Pesce.</p>
       </div>
-      
+
       <div className="product-grid">
         {loading && (
           <div className="product-card">

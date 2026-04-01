@@ -8,16 +8,15 @@ export default function LocationList() {
     <div className="location-list-container">
       <div className="location-header">
         <h2>Le Nostre Sedi</h2>
-        <p>Vieni a trovarci nel punto vendita più vicino a te.</p>
       </div>
-      
+
       <div className="location-grid">
         {locationsData.map((loc) => (
           <div key={loc.id} className="location-card">
             <div className="location-city-header">
               <h3>{loc.citta}</h3>
             </div>
-            
+
             <div className="location-details">
               <div className="loc-item">
                 <MapPin size={18} className="loc-icon" />
