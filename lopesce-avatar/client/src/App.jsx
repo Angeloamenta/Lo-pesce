@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAppStore } from './store/useAppStore';
 import { useRealtimeSession } from './hooks/useRealtimeSession';
-import StatusBar from './components/StatusBar/StatusBar';
 // import Avatar from './components/Avatar/Avatar';
 import Avatar3D from './components/Avatar3D/Avatar3D';
 import PushToTalk from './components/PushToTalk/PushToTalk';
@@ -17,6 +16,7 @@ import './App.css';
 function App() {
   const { sessionReady, startListening, stopListening } = useRealtimeSession();
   const { avatarPosition, activeComponent, resetUI } = useAppStore();
+  const controlsUnderAvatar = avatarPosition === 'left' && Boolean(activeComponent);
 
   return (
     <div className="app-container">
@@ -26,8 +26,6 @@ function App() {
       <FishesCanvas />
       <SeaweedCanvas />
       
-      <StatusBar />
-      
       {activeComponent && (
         <button className="reset-btn" onClick={resetUI}>
           Torna all'Avatar
@@ -35,9 +33,18 @@ function App() {
       )}
 
       <main className={`main-content layout-${avatarPosition}`}>
-        <div className="avatar-section">
+        <div className={`avatar-section ${controlsUnderAvatar ? 'with-controls' : ''}`}>
           {/* <Avatar position={avatarPosition} /> */}
           <Avatar3D position={avatarPosition} />
+          {controlsUnderAvatar && (
+            <div className="avatar-controls">
+              <PushToTalk
+                startListening={startListening}
+                stopListening={stopListening}
+                disabled={!sessionReady}
+              />
+            </div>
+          )}
         </div>
 
         {activeComponent === 'products' && (
@@ -62,13 +69,15 @@ function App() {
         )}
       </main>
 
-      <footer className="controls-section">
-        <PushToTalk 
-          startListening={startListening} 
-          stopListening={stopListening} 
-          disabled={!sessionReady}
-        />
-      </footer>
+      {!controlsUnderAvatar && (
+        <footer className="controls-section">
+          <PushToTalk
+            startListening={startListening}
+            stopListening={stopListening}
+            disabled={!sessionReady}
+          />
+        </footer>
+      )}
     </div>
   );
 }

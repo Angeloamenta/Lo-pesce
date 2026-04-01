@@ -17,6 +17,8 @@ body {
 }
 
 .app-container {
+  /* Spazio “riservato” per UI assoluta in alto (StatusBar + reset) */
+  --top-ui-offset: 84px;
   display: flex;
   flex-direction: column;
   height: 100dvh;
@@ -30,7 +32,8 @@ body {
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease;
-  padding: 1rem; /* Ridotto per far respirare la vista in orizzontale */
+  /* Padding top maggiorato per evitare sovrapposizioni con elementi absolute */
+  padding: calc(1rem + var(--top-ui-offset)) 1rem 1rem;
   gap: 1.5rem; 
   width: 100%;
   max-width: 1400px;
@@ -48,6 +51,19 @@ body {
   align-items: center; /* Tiene sempre e comunque l'avatar centrato in bolla */
   justify-content: center;
   transition: all 0.5s ease;
+}
+
+.avatar-section.with-controls {
+  flex-direction: column;
+  align-items: center; /* centra i controlli sotto il modello */
+  justify-content: flex-start;
+}
+
+.avatar-controls {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .layout-left .avatar-section {
@@ -87,8 +103,9 @@ body {
   font-size: 0.9rem;
   transition: all 0.2s;
   position: absolute;
-  top: 60px;
+  top: calc(var(--top-ui-offset) - 24px);
   right: 20px;
+  z-index: 11; /* sopra la status bar (z-index 10) */
 }
 
 .reset-btn:hover {
