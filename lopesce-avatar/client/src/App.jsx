@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppStore } from './store/useAppStore';
 import { useRealtimeSession } from './hooks/useRealtimeSession';
 import Avatar from './components/Avatar/Avatar';
@@ -18,13 +18,20 @@ function App() {
   const { avatarPosition, activeComponent, resetUI } = useAppStore();
   const controlsUnderAvatar = avatarPosition === 'left' && Boolean(activeComponent);
 
+  useEffect(() => {
+    const enabled = activeComponent === 'products';
+    document.documentElement.classList.toggle('bg-products', enabled);
+    document.body.classList.toggle('bg-products', enabled);
+    return () => document.body.classList.remove('bg-products');
+  }, [activeComponent]);
+
   return (
     <div className="app-container">
       <GodRays />
       <PlanktonCanvas />
-      <BubblesCanvas />
-      <FishesCanvas />
-      <SeaweedCanvas />
+      {activeComponent !== 'products' && <BubblesCanvas />}
+      {activeComponent !== 'products' && <FishesCanvas />}
+      {activeComponent !== 'products' && <SeaweedCanvas />}
       
       {activeComponent && (
         <button className="reset-btn" onClick={resetUI}>
@@ -34,7 +41,7 @@ function App() {
 
       <main className={`main-content layout-${avatarPosition}`}>
         <div className={`avatar-section ${controlsUnderAvatar ? 'with-controls' : ''}`}>
-          <Avatar position={avatarPosition} />
+          <Avatar position={avatarPosition} variant={activeComponent ? 'base' : 'bolle'} />
           {controlsUnderAvatar && (
             <div className="avatar-controls">
               <PushToTalk

@@ -2,8 +2,9 @@ import React from 'react';
 import { useAppStore } from '../../store/useAppStore';
 import './Avatar.css';
 
-export default function Avatar({ position }) {
+export default function Avatar({ position, variant = 'bolle' }) {
   const { isSpeaking, isListening } = useAppStore();
+  const avatarSrc = variant === 'base' ? '/avatar-base.png' : '/avatar-bolle.png';
 
   /* 
    * PREDISPOSIZIONE LOTTIE 
@@ -22,7 +23,7 @@ export default function Avatar({ position }) {
 
   return (
     <div className={`avatar-wrapper ${position} ${isSpeaking ? 'speaking' : ''} ${isListening ? 'listening' : ''}`}>
-      <img src="/avatar-base.png" alt="Lo Pesce Avatar" className="avatar-image" />
+      <img src={avatarSrc} alt="Lo Pesce Avatar" className="avatar-image" />
     </div>
   );
 }

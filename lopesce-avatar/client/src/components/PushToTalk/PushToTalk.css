@@ -10,7 +10,7 @@
   height: 90px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--lp-red);
   color: #fff;
   cursor: pointer;
   display: flex;
@@ -29,40 +29,40 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border: 2px solid #00c8ff;
+  border: 2px solid var(--lp-red);
   border-radius: 50%;
   transition: all 0.3s ease;
 }
 
 .ptt-btn:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .ptt-btn:not(:disabled):hover {
-  background: rgba(0, 200, 255, 0.2);
+  background: rgba(224, 57, 58, 0.88);
   transform: scale(1.05);
 }
 
 .ptt-btn.recording {
-  background: #ff4444;
+  background: var(--lp-red);
   color: #fff;
-  border-color: #ff4444;
+  border-color: var(--lp-red);
 }
 
 .ptt-btn.recording::before {
-  border-color: #ff4444;
+  border-color: var(--lp-red);
   animation: ptt-pulse 1s infinite;
 }
 
 .ptt-btn.speaking {
-  background: #00c8ff;
+  background: var(--lp-red);
   color: #fff;
 }
 
 .ptt-label {
   font-size: 0.9rem;
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.92);
   letter-spacing: 0.5px;
   user-select: none;
 }
