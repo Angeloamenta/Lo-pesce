@@ -5,9 +5,10 @@ import './Avatar.css';
 export default function Avatar({ position, variant = 'bolle' }) {
   const { isSpeaking, isListening } = useAppStore();
   const avatarSrc =
-    variant === 'saluta' ? '/avatar-saluta.png' :
-    variant === 'base'   ? '/avatar-base.png'   :
-                           '/avatar-bolle.png';
+    variant === 'saluta'   ? '/avatar-saluta.png'   :
+    variant === 'sorpreso' ? '/avatar-sorpreso.png' :
+    variant === 'base'     ? '/avatar-base.png'     :
+                             '/avatar-bolle.png';
 
   /* 
    * PREDISPOSIZIONE LOTTIE 

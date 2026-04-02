@@ -14,6 +14,7 @@ export default function LocationList() {
         {locationsData.map((loc) => (
           <div key={loc.id} className="location-card">
             <div className="location-city-header">
+              <span className="location-badge">Punto Vendita</span>
               <h3>{loc.citta}</h3>
             </div>
 

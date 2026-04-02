@@ -1,13 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import './ProductList.css';
+import './RecipeList.css';
 
 function stripHtml(html = '') {
   return html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
-}
-
-function firstImgSrcFromHtml(html = '') {
-  const m = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-  return m?.[1] || '';
 }
 
 function normalizeWpUrl(url = '') {
@@ -17,7 +12,7 @@ function normalizeWpUrl(url = '') {
   return url;
 }
 
-export default function ProductList() {
+export default function RecipeList() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -35,7 +30,7 @@ export default function ProductList() {
 
         while (true) {
           const res = await fetch(
-            `https://lopesce.it/wp-json/wp/v2/prodotti?per_page=${perPage}&page=${page}&_embed=1`,
+            `https://lopesce.it/wp-json/wp/v2/ricette?per_page=${perPage}&page=${page}&_embed=1`,
             { headers: { Accept: 'application/json' } }
           );
 
@@ -63,77 +58,76 @@ export default function ProductList() {
     return () => { cancelled = true; };
   }, []);
 
-  const products = useMemo(
+  const recipes = useMemo(
     () =>
       items
         .map((x) => {
           const title = stripHtml(x?.title?.rendered || '');
 
-          // Immagine: featured media → prima immagine nel content
-          const featured =
-            x?._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+          // Immagine featured
+          const imageUrl = normalizeWpUrl(
             x?._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.medium?.source_url ||
-            '';
-          const fromContent = firstImgSrcFromHtml(x?.content?.rendered || '');
-          const imageUrl = normalizeWpUrl(featured || fromContent);
+            x?._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
+            ''
+          );
 
-          // Categoria dal termine tassonomia embedded
+          // Categoria ricetta (categorie_ricette)
           const category = x?._embedded?.['wp:term']?.[0]?.[0]?.name || '';
 
-          // Descrizione breve da Yoast SEO (già pulita) o dall'excerpt
+          // Descrizione da Yoast o excerpt
           const description =
             x?.yoast_head_json?.description ||
             stripHtml(x?.excerpt?.rendered || '');
 
-          // Link alla pagina prodotto
           const link = x?.link || '';
 
           return { id: x?.id || title, title, imageUrl, category, description, link };
         })
-        .filter((p) => p.title && !p.link.includes('/en/')),
+        // Solo versione italiana — esclude URL con /en/
+        .filter((r) => r.title && !r.link.includes('/en/')),
     [items]
   );
 
   return (
-    <div className="product-list-container">
-      <div className="product-header">
-        <h2>Il Nostro Catalogo Surgelati</h2>
+    <div className="recipe-list-container">
+      <div className="recipe-header">
+        <h2>Le Nostre Ricette</h2>
       </div>
 
-      <div className="product-grid">
+      <div className="recipe-grid">
         {loading && (
-          <div className="product-card">
-            <div className="product-info">
-              <h3>Caricamento prodotti…</h3>
+          <div className="recipe-card">
+            <div className="recipe-info">
+              <h3>Caricamento ricette…</h3>
             </div>
           </div>
         )}
 
         {!loading && error && (
-          <div className="product-card">
-            <div className="product-info">
+          <div className="recipe-card">
+            <div className="recipe-info">
               <h3>Errore caricamento</h3>
-              <p className="product-desc">{error}</p>
+              <p className="recipe-desc">{error}</p>
             </div>
           </div>
         )}
 
         {!loading &&
           !error &&
-          products.map((p) => (
-            <div key={p.id} className="product-card">
-              {p.imageUrl && (
-                <div className="product-img-wrapper">
-                  <img src={p.imageUrl} alt={p.title} loading="lazy" />
+          recipes.map((r) => (
+            <div key={r.id} className="recipe-card">
+              {r.imageUrl && (
+                <div className="recipe-img-wrapper">
+                  <img src={r.imageUrl} alt={r.title} loading="lazy" />
                 </div>
               )}
-              <div className="product-info">
-                {p.category && (
-                  <span className="product-category">{p.category}</span>
+              <div className="recipe-info">
+                {r.category && (
+                  <span className="recipe-category">{r.category}</span>
                 )}
-                <h3>{p.title}</h3>
-                {p.description && (
-                  <p className="product-desc">{p.description}</p>
+                <h3>{r.title}</h3>
+                {r.description && (
+                  <p className="recipe-desc">{r.description}</p>
                 )}
               </div>
             </div>

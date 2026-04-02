@@ -5,6 +5,7 @@ import Avatar from './components/Avatar/Avatar';
 // import Avatar3D from './components/Avatar3D/Avatar3D';
 import PushToTalk from './components/PushToTalk/PushToTalk';
 import ProductList from './components/ProductList/ProductList';
+import RecipeList from './components/RecipeList/RecipeList';
 import LocationList from './components/LocationList/LocationList';
 import BubblesCanvas from './components/BubblesCanvas/BubblesCanvas';
 import FishesCanvas from './components/FishesCanvas/FishesCanvas';
@@ -32,7 +33,9 @@ function App() {
       <BubblesCanvas />
       <FishesCanvas />
       <SeaweedCanvas />
-      
+      <div className='logo-container'>
+        <img className='logo' src="/favicon-lopesce.png" alt="" />
+      </div>
       {activeComponent && (
         <button className="reset-btn" onClick={resetUI}>
           Torna all'Avatar
@@ -45,8 +48,8 @@ function App() {
             position={avatarPosition}
             variant={
               activeComponent === 'locations' ? 'saluta' :
-              activeComponent ? 'base' :
-              'bolle'
+                activeComponent ? 'base' :
+                  'bolle'
             }
           />
           {controlsUnderAvatar && (
@@ -74,22 +77,19 @@ function App() {
 
         {activeComponent === 'recipe' && (
           <div className="content-section">
-            <div style={{ padding: '2rem', background: 'rgba(255,255,255,0.05)', borderRadius: '12px' }}>
-              <h2>Ricetta & Cottura</h2>
-              <p>Chiedi all'assistente i dettagli della ricetta! Presto nuovi contenuti interattivi in questa sezione.</p>
-            </div>
+            <RecipeList />
           </div>
         )}
       </main>
 
       {!controlsUnderAvatar && (
         <footer className="controls-section">
-          <div className="debug-transcript">
+          {/* <div className="debug-transcript">
             {transcript
               ? <span>{transcript}</span>
               : <span className="debug-placeholder">La trascrizione apparirà qui…</span>
             }
-          </div>
+          </div> */}
           <PushToTalk
             startListening={startListening}
             stopListening={stopListening}
