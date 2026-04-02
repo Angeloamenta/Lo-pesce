@@ -64,6 +64,12 @@ html.bg-products {
 
 .logo {
   width: 220px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
 }
 
 .logo-container {

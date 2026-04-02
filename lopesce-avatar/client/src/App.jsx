@@ -34,7 +34,12 @@ function App() {
       <FishesCanvas />
       <SeaweedCanvas />
       <div className='logo-container'>
-        <img className='logo' src="/favicon-lopesce.png" alt="" />
+        <img 
+          className='logo' 
+          src="/favicon-lopesce.png" 
+          alt="Lo Pesce Logo" 
+          onClick={() => window.location.reload()} 
+        />
       </div>
       {activeComponent && (
         <button className="reset-btn" onClick={resetUI}>
